@@ -2,21 +2,21 @@ import React, { useState, useEffect } from 'react'
 import Axios from 'axios';
 import Loader from 'react-loader-spinner';
 import 'bootstrap/dist/css/bootstrap.css';
-import Progress from '../Components/Progress';
-import Question from '../Components/Question';
-import Answers from '../Components/Answers';
-import { useHistory } from 'react-router-dom';
+import Progress from '../Components/Quiz/Progress';
+import Question from '../Components/Quiz/Question';
+import Answers from '../Components/Quiz/Answers';
+import { useHistory, useParams } from 'react-router-dom';
 import { FaRegCheckCircle, FaTimesCircle } from 'react-icons/fa';
 
 
-const Quiz = ({ id }) => {
-
+const Quiz = () => {
+    const { id } = useParams();
     const [isError, setIsError] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [data, setData] = useState(null);
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [currentAnswer, setCurrentAnswer] = useState('');
-    const [message, setMessage] = useState("");
+    const [message, setMessage] = useState('');
     const [isDisabled, setIsDisabled] = useState(false);
     const [answersUser, setAnswersUser] = useState([]);
     const [showResults, setShowResults] = useState(false);
@@ -42,16 +42,16 @@ const Quiz = ({ id }) => {
                 setIsLoading(false);
                 setIsError(true);
             });
-    }, [`${id}`]);
+    }, [id]);
 
 
 
     const renderResultMark = (answer) => {
 
         if (answer.result === 'correct') {
-            return <span className="green"><FaRegCheckCircle /></span>;//Ok icon
+            return <span className="results-icons" ><FaRegCheckCircle /></span>;//Ok icon
         } else {
-            return <span className="red"><FaTimesCircle /></span>; //Failed icon
+            return <span className="results-icons" ><FaTimesCircle /></span>; //Failed icon
         }
 
     }
@@ -86,8 +86,10 @@ const Quiz = ({ id }) => {
         return (
             <div>
                 {questionStatus}
-                <h4>Puntaje</h4>
-                <h4>{percentage}% - {detail()}</h4>
+                <div className="results-score">
+                    <h3>Puntaje</h3>
+                    <h3>{percentage}% - {detail()}</h3>
+                </div>
             </div>
         )
     };
@@ -137,7 +139,7 @@ const Quiz = ({ id }) => {
 
     if (showResults) {
         return (
-            <div className="quiz-container">
+            <div className="quiz-container container">
                 <h1>Resultados</h1>
                 {renderResultsData()}
                 <button className="result-btn btn" onClick={restart}>Reintentar</button>
@@ -148,38 +150,44 @@ const Quiz = ({ id }) => {
     } else {
 
         return (
-            <div className="quiz-container">
-
+            <>
                 {isError && (
-                    <div className="alert alert-danger" role="alert">
-                        Error
+                    <div className="alert alert-danger mt-3" role="alert">
+                        Error 404: Not Found.
+                        API error: There was an error please refresh the page and try again.
                     </div>
                 )}
-
-                {isLoading && (
-                    <Loader type="ThreeDots" color="#00BFFF" height={80} width={80} />
-                )}
+                <div className="quiz-container container">
 
 
-                {(id === "1") && <h1 className="quiz-title">Matemática</h1>}
-                {(id === "2") && <h1 className="quiz-title">Programación</h1>}
-                {(id === "3") && <h1 className="quiz-title">Geografía</h1>}
-                {(id === "4") && <h1 className="quiz-title">Cine</h1>}
 
-                {data && !isLoading && !isError && (
+                    {isLoading && (
+                        <Loader type="ThreeDots" color="#00BFFF" height={80} width={80} />
+                    )}
 
-                    <div>
-                        <Progress currentQuestion={currentQuestion + 1} total={data.length} />
-                        <Question currentQuestion={currentQuestion} data={data} />
-                        <Answers currentQuestion={currentQuestion} setCurrentAnswer={setCurrentAnswer} currentAnswer={currentAnswer} data={data} setIsDisabled={setIsDisabled} isDisabled={isDisabled} nextFunction={next} />
-                        {message}
-                    </div>
-                )
 
-                }
-            </div>
+                    {(id === "1") && <h1 className="quiz-title">Matemática</h1>}
+                    {(id === "2") && <h1 className="quiz-title">Programación</h1>}
+                    {(id === "3") && <h1 className="quiz-title">Geografía</h1>}
+                    {(id === "4") && <h1 className="quiz-title">Cine</h1>}
+
+                    {data && !isLoading && !isError && (
+
+                        <div>
+                            <Progress currentQuestion={currentQuestion + 1} total={data.length} />
+                            <Question currentQuestion={currentQuestion} data={data} />
+                            <Answers currentQuestion={currentQuestion} setCurrentAnswer={setCurrentAnswer} currentAnswer={currentAnswer} data={data} setIsDisabled={setIsDisabled} isDisabled={isDisabled} nextFunction={next} />
+                            {message}
+                        </div>
+                    )
+
+                    }
+                </div>
+            </>
         )
     }
 }
+
+
 
 export default Quiz

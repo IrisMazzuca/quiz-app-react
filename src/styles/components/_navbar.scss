@@ -1,0 +1,13 @@
+.navbar {
+    margin: 0;
+    padding: 0;
+    background-color: transparentize($color: $color-very-dark-blue, $amount: 0.5);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &-link:hover {
+        text-decoration: none;
+    }
+}

@@ -1,51 +1,46 @@
-.btn-category {
-    width: 300px;
-    height: 150px;
-    margin: $sp0;
-    border-radius: $sp2;
-    border: 3px solid #283845;
-    box-shadow: 0 0 20px 2px #24313b;
+.btn {
+    background-color: $color-very-dark-blue;
+    color: $color-white;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    outline: none;
+    border: none;
 
-
-    &:hover,
-    :focus,
-    :active {
-        cursor: pointer;
-        border: 3px solid #70eaee
+    &:active,
+    :focus {
+        border: none;
+        outline: none;
     }
 }
 
-.math {
-    background: url(../../assets/math.jpg);
-    background-size: cover;
-
+.btn:hover {
+    color: $color-white;
 }
 
-.computers {
-    background: url(../../assets/computers.jpg);
-    background-size: cover;
-}
-
-.geography {
-    background: url(../../assets/geography.jpg);
-    background-size: cover;
-}
-
-.films {
-    background: url(../../assets/films.jpg);
-    background-size: cover;
-}
-
-.category-title {
-    width: $sp5;
-    padding: $sp0;
-    text-align: center;
-    background-color: #283845;
-    color: #f1ecec;
+.quiz-btn {
+    margin: $sp1 0;
+    padding: $sp1 $sp5;
     border-radius: $sp2;
-    font-weight: bold;
-    position: relative;
-    top: $sp3;
-    left: $sp6;
+}
 
+.result-btn {
+    margin-bottom: -1rem;
+    padding: $sp1;
+    width: 300px;
+    border-radius: $sp2;
+}
+
+.admin-btn-category {
+    width: 30%;
+    margin-top: $sp0;
+    font-size: $sp1;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    &-green {
+        background-color: $color-green;
+        width: 100%;
+        font-size: $sp2;
+    }
 }

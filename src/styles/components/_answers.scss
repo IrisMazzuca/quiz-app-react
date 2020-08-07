@@ -1,0 +1,43 @@
+.answer {
+    background-color: transparent;
+    color: $color-white;
+    border: 1px solid $color-grey;
+    border-radius: $sp2;
+    padding: $sp1;
+    width: 300px;
+    margin-bottom: $sp0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &:hover {
+        outline: none;
+        cursor: pointer;
+        background-color: $color-grey-hover;
+    }
+
+
+}
+
+.correct {
+    background-color: $color-green;
+    border: 1px solid $color-green;
+
+    &:hover,
+    :active {
+        background-color: $color-green;
+        outline: none;
+    }
+}
+
+.incorrect {
+    background-color: $color-red;
+    border: 1px solid $color-red;
+
+    &:hover,
+    :active,
+    :focus {
+        background-color: $color-red;
+        outline: none;
+    }
+}

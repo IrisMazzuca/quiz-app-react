@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Answer from './Answer'
 import { FaRegDotCircle, FaRegCircle } from 'react-icons/fa';
+import PropTypes from 'prop-types'
 
 const Answers = ({ currentQuestion, data, setCurrentAnswer, currentAnswer, setIsDisabled, isDisabled, nextFunction }) => {
 
@@ -89,6 +90,16 @@ const Answers = ({ currentQuestion, data, setCurrentAnswer, currentAnswer, setIs
                 }}>NEXT</button>
         </>
     )
+}
+
+Answers.propTypes = {
+    currentQuestion: PropTypes.number,
+    data: PropTypes.array,
+    currentAnswer: PropTypes.string,
+    isDisabled: PropTypes.bool,
+    nextFunction: PropTypes.func,
+    setCurrentAnswer: PropTypes.func,
+    setIsDisabled: PropTypes.func
 }
 
 export default Answers

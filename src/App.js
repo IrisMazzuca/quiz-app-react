@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -8,16 +8,44 @@ import {
 import Home from './Routes/Home';
 import Quiz from './Routes/Quiz';
 import Error from './Routes/Error';
+import Admin from './Routes/Admin';
+import NavBar from './Components/NavBar';
+import Axios from 'axios';
 
 
 function App() {
-  const [id, setId] = useState("1")
+
+  const [isError, setIsError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [dataCategories, setDataCategories] = useState(null);
+
+  useEffect(() => {
+
+    setIsLoading(true);
+    setIsError(false);
+
+    Axios
+
+      .get(`https://5f280f4ef5d27e001612ea88.mockapi.io/categories`)
+
+      .then((response) => {
+        console.log(response.data);
+        setDataCategories(response.data);
+        setIsLoading(false);
+      })
+
+      .catch(() => {
+        setIsLoading(false);
+        setIsError(true);
+      });
+
+  }, []);
 
 
   return (
-    <div className="container">
+    <div >
       <Router>
-
+        <NavBar />
         <Switch>
 
           <Route exact path="/">
@@ -25,11 +53,15 @@ function App() {
           </Route>
 
           <Route exact path="/home">
-            <Home setId={setId} />
+            <Home dataCategories={dataCategories} />
           </Route>
 
-          <Route exact path="/quiz">
-            <Quiz id={id} />
+          <Route exact path="/quiz/:id">
+            <Quiz />
+          </Route>
+
+          <Route exact path="/admin">
+            <Admin dataCategories={dataCategories} isError={isError} isLoading={isLoading} />
           </Route>
 
           <Route>

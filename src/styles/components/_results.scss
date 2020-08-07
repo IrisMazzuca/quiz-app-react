@@ -1,0 +1,16 @@
+.results-icons {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.results-score {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: $sp0;
+    margin-bottom: $sp1;
+    border-radius: $sp2;
+    background-color: $color-grey;
+    border: 2px solid transparent;
+}
