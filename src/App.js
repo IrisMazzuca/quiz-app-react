@@ -55,6 +55,10 @@ function App() {
             <Redirect exact from="/" to="/home" />
           </Route>
 
+          <Route exact path="/quiz-app-react">
+            <Redirect exact from="/quiz-app-react" to="/home" />
+          </Route>
+
           <Route exact path="/home">
             <Home dataCategories={dataCategories} />
           </Route>
