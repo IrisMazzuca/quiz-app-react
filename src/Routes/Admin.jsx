@@ -7,7 +7,8 @@ import NewQuestion from '../Components/Admin/NewQuestion';
 import AnswerOptions from '../Components/Admin/AnswerOptions';
 import CorrectAnswer from '../Components/Admin/CorrectAnswer';
 
-const Admin = ({ dataCategories, isError, isLoading }) => {
+
+const Admin = ({ dataCategories, isErrorCategories, isLoadingCategories, data }) => {
 
     const [addCategory, setAddCategory] = useState(false);
     const [categoryForm, setCategoryForm] = useState({});
@@ -24,7 +25,7 @@ const Admin = ({ dataCategories, isError, isLoading }) => {
         setCategoryForm({ ...categoryForm, [name]: value });
     };
 
-
+    //function to add a new category
     const add = () => {
 
         Axios
@@ -41,7 +42,7 @@ const Admin = ({ dataCategories, isError, isLoading }) => {
 
     };
 
-
+    // function to add a new question, with its possible options and correct answer.
     const addQuestion = () => {
 
         const form = {
@@ -71,7 +72,7 @@ const Admin = ({ dataCategories, isError, isLoading }) => {
     }
 
 
-
+    //onClick function to display the necessary inputs for loading a new category
     const renderInputNewCategory = () => {
         if (addCategory) {
             return (
@@ -95,9 +96,10 @@ const Admin = ({ dataCategories, isError, isLoading }) => {
         }
     }
 
+
     return (
         <>
-            {isError && (
+            {isErrorCategories && (
                 <div className="alert alert-danger mt-3" role="alert">
                     Error 404: Not Found.
                     API error: There was an error please refresh the page and try again.
@@ -105,16 +107,17 @@ const Admin = ({ dataCategories, isError, isLoading }) => {
             )}
 
 
-            {isLoading && (
+            {isLoadingCategories && (
                 <Loader type="ThreeDots" color="#00BFFF" height={80} width={80} />
             )}
 
 
-            {dataCategories && !isLoading && !isError && (
+            {dataCategories && !isLoadingCategories && !isErrorCategories && (
 
                 <div className="container admin-container mt-3">
+
                     <h2>Formulario</h2>
-                    <p className="quiz-subtitle">Nuevas Preguntas</p>
+                    <p className="quiz-subtitle">Nueva Pregunta</p>
                     <div className="d-flex flex-column">
 
                         <Category dataCategories={dataCategories} setAddCategory={setAddCategory} setCategoryId={setCategoryId} renderInputNewCategory={renderInputNewCategory} />
@@ -131,9 +134,10 @@ const Admin = ({ dataCategories, isError, isLoading }) => {
                             className="btn admin-btn-category admin-btn-category-green mb-4 "
                             onClick={addQuestion}>
                             Agregar
-                        </button>
+                                </button>
 
                     </div>
+
                 </div>
 
             )}
@@ -145,10 +149,9 @@ const Admin = ({ dataCategories, isError, isLoading }) => {
 
 Admin.propTypes = {
     dataCategories: PropTypes.array,
-    isError: PropTypes.bool,
-    isLoading: PropTypes.bool,
-    setIsError: PropTypes.func,
-    setIsLoading: PropTypes.func
+    isErrorCategories: PropTypes.bool,
+    isLoadingCategories: PropTypes.bool,
+    data: PropTypes.array
 }
 
 export default Admin

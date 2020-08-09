@@ -7,13 +7,11 @@ import Question from '../Components/Quiz/Question';
 import Answers from '../Components/Quiz/Answers';
 import { useHistory, useParams } from 'react-router-dom';
 import { FaRegCheckCircle, FaTimesCircle } from 'react-icons/fa';
+import PropTypes from 'prop-types'
 
 
-const Quiz = () => {
+const Quiz = ({ dataCategories, data, setData, isError, setIsError, isLoading, setIsLoading }) => {
     const { id } = useParams();
-    const [isError, setIsError] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
-    const [data, setData] = useState(null);
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [currentAnswer, setCurrentAnswer] = useState('');
     const [message, setMessage] = useState('');
@@ -165,11 +163,17 @@ const Quiz = () => {
                         <Loader type="ThreeDots" color="#00BFFF" height={80} width={80} />
                     )}
 
+                    {dataCategories && (
+                        <>
+                            {dataCategories.map(category => {
+                                if (category.id === id) {
+                                    return (<h1 key={category.id} className="quiz-title">{category.name}</h1>)
+                                }
+                            }
+                            )}
+                        </>
+                    )}
 
-                    {(id === "1") && <h1 className="quiz-title">Matemática</h1>}
-                    {(id === "2") && <h1 className="quiz-title">Programación</h1>}
-                    {(id === "3") && <h1 className="quiz-title">Geografía</h1>}
-                    {(id === "4") && <h1 className="quiz-title">Cine</h1>}
 
                     {data && !isLoading && !isError && (
 
@@ -177,6 +181,7 @@ const Quiz = () => {
                             <Progress currentQuestion={currentQuestion + 1} total={data.length} />
                             <Question currentQuestion={currentQuestion} data={data} />
                             <Answers currentQuestion={currentQuestion} setCurrentAnswer={setCurrentAnswer} currentAnswer={currentAnswer} data={data} setIsDisabled={setIsDisabled} isDisabled={isDisabled} nextFunction={next} />
+
                             {message}
                         </div>
                     )
@@ -188,6 +193,14 @@ const Quiz = () => {
     }
 }
 
-
+Quiz.propTypes = {
+    dataCategories: PropTypes.array,
+    data: PropTypes.array,
+    setData: PropTypes.func,
+    isError: PropTypes.bool,
+    setIsError: PropTypes.func,
+    isLoading: PropTypes.bool,
+    setIsLoading: PropTypes.func
+}
 
 export default Quiz

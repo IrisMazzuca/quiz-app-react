@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 
 const Home = ({ dataCategories }) => {
 
+
     return (dataCategories && (
         <div className="home-container container">
 
@@ -13,13 +14,17 @@ const Home = ({ dataCategories }) => {
 
             {dataCategories.map(category => {
                 return (
+
                     <Link
                         className="home-category"
                         key={category.id}
                         to={`/quiz/${category.id}`}
-                        style={{ background: `url(${category.img})`, backgroundSize: 'cover' }} >
-                        < p className="home-category-title" > {category.name}</p>
-                    </Link >
+                        style={{ background: `url(${category.img})`, backgroundSize: 'cover' }}>
+
+                        <p className="home-category-title" > {category.name}</p>
+
+                    </Link>
+
                 )
             })}
 

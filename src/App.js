@@ -15,14 +15,17 @@ import Axios from 'axios';
 
 function App() {
 
+  const [isErrorCategories, setIsErrorCategories] = useState(false);
+  const [isLoadingCategories, setIsLoadingCategories] = useState(false);
+  const [dataCategories, setDataCategories] = useState(null);
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [dataCategories, setDataCategories] = useState(null);
+  const [data, setData] = useState(null);
 
   useEffect(() => {
 
-    setIsLoading(true);
-    setIsError(false);
+    setIsLoadingCategories(true);
+    setIsErrorCategories(false);
 
     Axios
 
@@ -31,12 +34,12 @@ function App() {
       .then((response) => {
         console.log(response.data);
         setDataCategories(response.data);
-        setIsLoading(false);
+        setIsLoadingCategories(false);
       })
 
       .catch(() => {
-        setIsLoading(false);
-        setIsError(true);
+        setIsLoadingCategories(false);
+        setIsErrorCategories(true);
       });
 
   }, []);
@@ -57,11 +60,11 @@ function App() {
           </Route>
 
           <Route exact path="/quiz/:id">
-            <Quiz />
+            <Quiz dataCategories={dataCategories} isError={isError} setIsError={setIsError} isLoading={isLoading} setIsLoading={setIsLoading} data={data} setData={setData} />
           </Route>
 
           <Route exact path="/admin">
-            <Admin dataCategories={dataCategories} isError={isError} isLoading={isLoading} />
+            <Admin dataCategories={dataCategories} isErrorCategories={isErrorCategories} isLoadingCategories={isLoadingCategories} data={data} />
           </Route>
 
           <Route>

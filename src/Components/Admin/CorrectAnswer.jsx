@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 const CorrectAnswer = ({ setAnswer }) => {
     return (
-        <div>
+        <div className="d-flex flex-column">
             <label className="mt-5">Respuesta Correcta</label>
             <select
                 className="admin-input"

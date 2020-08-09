@@ -17,38 +17,31 @@
 .home-category {
     width: 300px;
     height: 150px;
+    overflow: hidden;
     margin: $sp0;
     border-radius: $sp2;
-    border: 3px solid $color-dark-blue;
+    border: 2px solid $color-dark-blue;
     box-shadow: 0 0 20px 2px $color-dark-blue-shadow;
+    transition: all 1s;
 
-    &:hover,
-    :focus,
-    :active {
+    &:hover {
         cursor: pointer;
-        border: 3px solid $color-grey;
+        border: 2px solid $color-light-blue;
         text-decoration: none;
+        transform: scale(1.05);
+        opacity: 1;
+        transition: all 1s;
     }
-}
-
-.home-img {
-    width: 292px;
-    height: 142px;
-    border-radius: $sp2;
-    background-size: cover;
-
 }
 
 
 .home-category-title {
-    width: $sp5;
+    width: 300px;
     padding: $sp0;
     text-align: center;
     background-color: $color-very-dark-blue;
     color: $color-white;
-    border-radius: $sp2;
+    border-top-left-radius: $sp2;
+    border-top-right-radius: $sp2;
     font-weight: bold;
-    position: relative;
-    top: $sp1;
-    left: $sp6;
 }
