@@ -70,11 +70,12 @@ const Quiz = ({ dataCategories, data, setData, isError, setIsError, isLoading, s
         }
 
         const questionStatus = answersUser.map(answer => {
+
             return (
                 <div key={answer.id} >
                     <ul>
                         <li className="answer">
-                            Pregunta {answer.id} {renderResultMark(answer)}
+                            Pregunta {answersUser.indexOf(answer) + 1} {renderResultMark(answer)}
                         </li>
                     </ul>
                 </div>
